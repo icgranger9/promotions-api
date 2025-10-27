@@ -13,7 +13,7 @@ public interface PromotionService {
 
     public void createPromotion(Promotion promotion);
 
-    public void updatePromotion(Promotion promotion);
+    public void updatePromotion(Long id, Promotion promotion);
 
     public void deletePromotion(Long id);
 

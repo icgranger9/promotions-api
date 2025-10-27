@@ -36,9 +36,22 @@ public class PromotionServiceImpl implements PromotionService {
     }
 
     @Override
-    public void updatePromotion(Promotion promotion) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updatePromotion'");
+    public void updatePromotion(Long id, Promotion promotion) {
+        // Find existing promotion
+        Promotion existingPromotion = promotionRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("NO PROMOTION PRESENT WITH ID = " + id));
+
+        // Update fields
+        existingPromotion.setCouponCode(promotion.getCouponCode());
+        existingPromotion.setStatus(promotion.getStatus());
+        existingPromotion.setStartDate(promotion.getStartDate());
+        existingPromotion.setEndDate(promotion.getEndDate());
+        existingPromotion.setRewardType(promotion.getRewardType());
+        existingPromotion.setDiscountValue(promotion.getDiscountValue());
+
+        // Save updated promotion
+        promotionRepository.save(existingPromotion);
+
     }
 
     @Override
