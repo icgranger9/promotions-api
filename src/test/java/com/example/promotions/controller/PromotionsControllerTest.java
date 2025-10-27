@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
 
 import java.time.ZonedDateTime;
 import java.math.BigDecimal;
@@ -33,8 +34,9 @@ class PromotionsControllerTest {
 
         when(promotionService.getPromtion(10L)).thenReturn(p);
 
-        Promotion result = controller.getPromotion(10L);
-        assertSame(p, result);
+        ResponseEntity<Promotion> result = controller.getPromotion(10L);
+        assertEquals(200, result.getStatusCode());
+        assertSame(p, result.getBody());
         verify(promotionService, times(1)).getPromtion(10L);
     }
 }

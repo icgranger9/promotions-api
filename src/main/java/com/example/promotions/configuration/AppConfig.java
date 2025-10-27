@@ -1,15 +1,23 @@
-package com.example.promotions.configuration;
+// package com.example.promotions.configuration;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+// // import java.beans.BeanProperty;
 
-import com.example.promotions.service.impl.PromotionServiceImpl;
+// import org.springframework.context.annotation.Bean;
+// import org.springframework.context.annotation.Configuration;
 
-@Configuration
-public class AppConfig {
+// import com.example.promotions.service.impl.PromotionServiceImpl;
+// // import com.example.promotions.repository.PromotionRepository;
 
-    @Bean
-    public PromotionServiceImpl promotionService() {
-        return new PromotionServiceImpl();
-    }
-}
+// @Configuration
+// public class AppConfig {
+
+// @Bean
+// public PromotionServiceImpl promotionService() {
+// return new PromotionServiceImpl();
+// }
+
+// // @Bean
+// // public PromotionRepository promotionRepository() {
+// // return new InMemoryPromotionRepository();
+// // }
+// }

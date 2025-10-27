@@ -22,12 +22,12 @@ clean:
 # Package the project into a JAR
 package:
 	@echo "Packaging project..."
-	@mvn package
+	@mvn -DskipTests=true package
 
-# Run the application (we'll use exec:java since this is a simple bean demo)
+# Run the application (development: uses spring-boot:run)
 run:
-	@echo "Running application..."
-	@mvn exec:java -Dexec.mainClass="com.example.hellobean.AppConfig"
+	@echo "Running application (spring-boot:run)..."
+	@mvn -DskipTests=true spring-boot:run
 
 # Install dependencies (useful for first-time setup)
 deps:
@@ -37,13 +37,14 @@ deps:
 # Display help information
 help:
 	@echo "Available targets:"
-	@echo "  compile  - Compile the project"
-	@echo "  test     - Run tests"
-	@echo "  clean    - Clean build artifacts"
-	@echo "  package  - Create JAR package"
-	@echo "  run      - Run the application"
-	@echo "  deps     - Install dependencies"
-	@echo "  help     - Show this help message"
+	@echo "  compile   - Compile the project"
+	@echo "  test      - Run tests"
+	@echo "  clean     - Clean build artifacts"
+	@echo "  package   - Create JAR package (skips tests)"
+	@echo "  run       - Run the app via spring-boot:run (skips tests)."
+	@echo "              Can set SPRING_PROFILES_ACTIVE and JAVA_OPTS."
+	@echo "  deps      - Install dependencies"
+	@echo "  help      - Show this help message"
 
 # Set default goal
 .DEFAULT_GOAL := help

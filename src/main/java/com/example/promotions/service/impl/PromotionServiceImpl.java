@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.promotions.model.Promotion;
 import com.example.promotions.repository.PromotionRepository;
 import com.example.promotions.service.PromotionService;
 
+@Service
 public class PromotionServiceImpl implements PromotionService {
 
     @Autowired
@@ -23,9 +25,14 @@ public class PromotionServiceImpl implements PromotionService {
     }
 
     @Override
+    public Promotion[] getPromtions() {
+        List<Promotion> promotions = promotionRepository.findAll();
+        return promotions.toArray(new Promotion[0]);
+    }
+
+    @Override
     public void createPromotion(Promotion promotion) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createPromotion'");
+        promotionRepository.save(promotion);
     }
 
     @Override

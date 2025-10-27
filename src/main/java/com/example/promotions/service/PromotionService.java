@@ -9,6 +9,8 @@ public interface PromotionService {
 
     public Promotion getPromtion(Long id);
 
+    public Promotion[] getPromtions();
+
     public void createPromotion(Promotion promotion);
 
     public void updatePromotion(Promotion promotion);
