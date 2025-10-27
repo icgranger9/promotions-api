@@ -82,9 +82,7 @@ mvn -v
 1. Ensure JDK 21 and Maven are available (see above).
 2. From project root:
 ```bash
-make test
+make run
 # or
-mvn clean test
+mvn spring-boot:run
 ```
-
-If you want the Makefile or README adjusted (different targets, alternate Java version, or to remove the enforcer), say which change and it will be applied.
