@@ -12,7 +12,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Project Java version; change here to target a different JDK -->
         <java.version>21</java.version>
-        <junit.jupiter.version>5.9.3</junit.jupiter.version>
+        <junit.jupiter.version>6.0.0</junit.jupiter.version>
         <spring.version>6.2.9</spring.version>
         <spring.data.version>3.5.5</spring.data.version>
         <spring.web.version>3.5.5</spring.web.version>
@@ -21,18 +21,6 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Core / Context for @Configuration, @Bean, ApplicationContext -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <!-- Spring framework data-->
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>${spring.data.version}</version>
-        </dependency>
         <!-- Spring Boot-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -50,6 +38,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
             <version>${spring.boot.version}</version>
+        </dependency>
+        <!-- Test support: Spring Boot test (includes JUnit 5, MockMvc, Mockito, Jackson) -->
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.boot.version}</version>
+          <scope>test</scope>
         </dependency>
 
         <!-- dev/test runtime DB so the app can start out of the box -->
@@ -100,6 +95,12 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-api</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
         <!-- SLF4J API (compile) and Logback binding (runtime, also used in tests) -->
         <dependency>
           <groupId>org.slf4j</groupId>
@@ -112,20 +113,6 @@
           <groupId>org.mockito</groupId>
           <artifactId>mockito-junit-jupiter</artifactId>
           <version>5.5.0</version>
-          <scope>test</scope>
-        </dependency>
-
-        <dependency>
-          <groupId>org.junit.platform</groupId>
-          <artifactId>junit-platform-suite-api</artifactId>
-          <version>1.9.3</version>
-          <scope>test</scope>
-        </dependency>
-        <!-- Test support: Spring Boot test (includes JUnit 5, MockMvc, Mockito, Jackson) -->
-        <dependency>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-test</artifactId>
-            <version>${spring.boot.version}</version>
           <scope>test</scope>
         </dependency>
     </dependencies>

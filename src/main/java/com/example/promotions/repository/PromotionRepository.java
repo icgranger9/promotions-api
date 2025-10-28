@@ -27,6 +27,6 @@ public interface PromotionRepository extends JpaRepository<Promotion, Long> {
     Optional<Promotion[]> findPromotionsByStatus(@NonNull PromotionStatus status);
 
     @NonNull
-    Optional<Promotion[]> findPromotionsByType(@NonNull RewardType rewardType);
+    Optional<Promotion[]> findPromotionsByRewardType(@NonNull RewardType rewardType);
 
 }

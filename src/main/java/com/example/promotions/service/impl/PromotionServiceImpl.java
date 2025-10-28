@@ -49,7 +49,7 @@ public class PromotionServiceImpl implements PromotionService {
 
     @Override
     public Promotion[] getPromotionsByType(RewardType rewardType) {
-        return promotionRepository.findPromotionsByType(rewardType)
+        return promotionRepository.findPromotionsByRewardType(rewardType)
                 .orElseThrow(() -> new NoSuchElementException("NO PROMOTIONS PRESENT WITH TYPE = " + rewardType));
     }
 
