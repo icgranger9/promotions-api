@@ -121,6 +121,13 @@
           <version>1.9.3</version>
           <scope>test</scope>
         </dependency>
+        <!-- Test support: Spring Boot test (includes JUnit 5, MockMvc, Mockito, Jackson) -->
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.boot.version}</version>
+          <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
