@@ -23,6 +23,8 @@ import com.example.promotions.service.PromotionService;
 import jakarta.validation.Valid;
 
 import com.example.promotions.model.Promotion;
+import com.example.promotions.model.PromotionStatus;
+import com.example.promotions.model.RewardType;
 
 @RestController
 public class PromotionsController {
@@ -81,9 +83,34 @@ public class PromotionsController {
         }
     }
 
+    @GetMapping("/promotions/status")
+    public ResponseEntity<Promotion[]> getPromotionsByStatus(@RequestParam("status") PromotionStatus status) {
+        LOGGER.info("Received request for promotions with status: {}", status);
+
+        try {
+            Promotion[] promotions = promotionService.getPromotionsByStatus(status);
+            return ResponseEntity.ok(promotions);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @GetMapping("/promotions/type")
+    public ResponseEntity<Promotion[]> getPromotionsByType(@RequestParam("type") RewardType type) {
+        LOGGER.info("Received request for promotions with type: {}", type);
+
+        try {
+            Promotion[] promotions = promotionService.getPromotionsByType(type);
+            return ResponseEntity.ok(promotions);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
     @PostMapping("/promotion")
     public ResponseEntity<Promotion> createPromotion(@Valid @RequestBody Promotion promotion) {
         LOGGER.info("Received request to create promotion: {}", promotion);
+
         try {
             Promotion savedPromo = promotionService.createPromotion(promotion);
             return ResponseEntity.ok(savedPromo);

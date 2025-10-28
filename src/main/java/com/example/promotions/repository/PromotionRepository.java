@@ -1,6 +1,9 @@
 package com.example.promotions.repository;
 
 import com.example.promotions.model.Promotion;
+import com.example.promotions.model.PromotionStatus;
+import com.example.promotions.model.RewardType;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,5 +22,11 @@ public interface PromotionRepository extends JpaRepository<Promotion, Long> {
     @Query("SELECT p FROM Promotion p WHERE p.startDate >= :start AND p.endDate <= :end")
     Optional<Promotion[]> findPromotionsContainedInDateRange(@Param("start") @NonNull ZonedDateTime startDate,
             @Param("end") @NonNull ZonedDateTime endDate);
+
+    @NonNull
+    Optional<Promotion[]> findPromotionsByStatus(@NonNull PromotionStatus status);
+
+    @NonNull
+    Optional<Promotion[]> findPromotionsByType(@NonNull RewardType rewardType);
 
 }

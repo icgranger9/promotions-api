@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.promotions.model.Promotion;
+import com.example.promotions.model.PromotionStatus;
+import com.example.promotions.model.RewardType;
 import com.example.promotions.repository.PromotionRepository;
 import com.example.promotions.service.PromotionService;
 
@@ -37,6 +39,18 @@ public class PromotionServiceImpl implements PromotionService {
     public Promotion[] getPromotionsInRange(ZonedDateTime startDate, ZonedDateTime endDate) {
         return promotionRepository.findPromotionsContainedInDateRange(startDate, endDate)
                 .orElseThrow(() -> new NoSuchElementException("NO PROMOTIONS PRESENT IN THE GIVEN DATE RANGE"));
+    }
+
+    @Override
+    public Promotion[] getPromotionsByStatus(PromotionStatus status) {
+        return promotionRepository.findPromotionsByStatus(status)
+                .orElseThrow(() -> new NoSuchElementException("NO PROMOTIONS PRESENT WITH STATUS = " + status));
+    }
+
+    @Override
+    public Promotion[] getPromotionsByType(RewardType rewardType) {
+        return promotionRepository.findPromotionsByType(rewardType)
+                .orElseThrow(() -> new NoSuchElementException("NO PROMOTIONS PRESENT WITH TYPE = " + rewardType));
     }
 
     @Override
