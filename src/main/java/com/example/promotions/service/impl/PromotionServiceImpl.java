@@ -1,9 +1,11 @@
 package com.example.promotions.service.impl;
 
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import com.example.promotions.service.PromotionService;
 
 @Service
 public class PromotionServiceImpl implements PromotionService {
+    public static final Logger LOGGER = LoggerFactory.getLogger(PromotionServiceImpl.class);
 
     @Autowired
     private PromotionRepository promotionRepository;
@@ -31,12 +34,21 @@ public class PromotionServiceImpl implements PromotionService {
     }
 
     @Override
-    public void createPromotion(Promotion promotion) {
-        promotionRepository.save(promotion);
+    public Promotion[] getPromotionsInRange(ZonedDateTime startDate, ZonedDateTime endDate) {
+        return promotionRepository.findPromotionsContainedInDateRange(startDate, endDate)
+                .orElseThrow(() -> new NoSuchElementException("NO PROMOTIONS PRESENT IN THE GIVEN DATE RANGE"));
     }
 
     @Override
-    public void updatePromotion(Long id, Promotion promotion) {
+    public Promotion createPromotion(Promotion promotion) {
+        LOGGER.info("Creating promotion: {}", promotion);
+        Promotion savedPromo = promotionRepository.save(promotion);
+
+        return savedPromo;
+    }
+
+    @Override
+    public Promotion updatePromotion(Long id, Promotion promotion) {
         // Find existing promotion
         Promotion existingPromotion = promotionRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("NO PROMOTION PRESENT WITH ID = " + id));
@@ -50,19 +62,12 @@ public class PromotionServiceImpl implements PromotionService {
         existingPromotion.setDiscountValue(promotion.getDiscountValue());
 
         // Save updated promotion
-        promotionRepository.save(existingPromotion);
-
+        Promotion updatedPromo = promotionRepository.save(existingPromotion);
+        return updatedPromo;
     }
 
     @Override
     public void deletePromotion(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletePromotion'");
-    }
-
-    @Override
-    public List<Promotion> getPromotionsInRange(Date startDate, Date endDate) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPromotionsInRange'");
+        promotionRepository.deleteById(id);
     }
 }

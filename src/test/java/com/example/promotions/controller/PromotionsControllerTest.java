@@ -35,7 +35,7 @@ class PromotionsControllerTest {
         when(promotionService.getPromtion(10L)).thenReturn(p);
 
         ResponseEntity<Promotion> result = controller.getPromotion(10L);
-        assertEquals(200, result.getStatusCode());
+        assertEquals(200, result.getStatusCode().value());
         assertSame(p, result.getBody());
         verify(promotionService, times(1)).getPromtion(10L);
     }
